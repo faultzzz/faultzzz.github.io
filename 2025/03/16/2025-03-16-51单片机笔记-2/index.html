@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="51单片机笔记(2)-定时器"/>
+
+
+
+
+  <meta name="keywords" content="51," />
+
+
+
+
+
+    <link rel="alternate" href="/default" title="帷幕47号公寓" >
+
+
+
+
+    <link rel="shortcut icon" type="image/x-icon" href="/icon.ico?v=1.1"/>
+
+
+
+<link rel="canonical" href="https://blog.faultzzz.top/2025/03/16/2025-03-16-51单片机笔记-2/"/>
+
+
+<meta name="description" content="定时器记录补票  定时器介绍1.单片机内部资源，电路连接与运转均在单片机内部完成 2.作用：用于计时系统，可实现软件计时&#x2F;使程序每隔一固定时间完成一项操作；替代长时间Delay，提高CPU运行速率和效率…… at89c52定时器资源-使用内部资源时使用手册T0、T1-与传统单片机兼容 T2-本型号增加资源  定时器工作模式根据时钟输出信号，每隔固定时间，计数单元数值加一，当计数单元数值增">
+<meta property="og:type" content="article">
+<meta property="og:title" content="51单片机笔记(2)-定时器">
+<meta property="og:url" content="https://blog.faultzzz.top/2025/03/16/2025-03-16-51%E5%8D%95%E7%89%87%E6%9C%BA%E7%AC%94%E8%AE%B0-2/index.html">
+<meta property="og:site_name" content="帷幕47号公寓">
+<meta property="og:description" content="定时器记录补票  定时器介绍1.单片机内部资源，电路连接与运转均在单片机内部完成 2.作用：用于计时系统，可实现软件计时&#x2F;使程序每隔一固定时间完成一项操作；替代长时间Delay，提高CPU运行速率和效率…… at89c52定时器资源-使用内部资源时使用手册T0、T1-与传统单片机兼容 T2-本型号增加资源  定时器工作模式根据时钟输出信号，每隔固定时间，计数单元数值加一，当计数单元数值增">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-16T08:37:18.000Z">
+<meta property="article:modified_time" content="2025-03-16T11:26:11.601Z">
+<meta property="article:author" content="Rvime">
+<meta property="article:tag" content="51">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1"/>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+    
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?[BAIDU ANALYTICS KEY]";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=[GOOGLE ANALYTICS GTAG]"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '[GOOGLE ANALYTICS GTAG]');
+  </script>
+
+
+
+
+
+    
+
+
+
+    <link rel="stylesheet" type="text/css" href="/css/search.css?v=1.1"/>
+
+
+
+    <title> 51单片机笔记(2)-定时器 - 帷幕47号公寓 </title>
+  <meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    <div id="main-container">
+      <header id="mnh-header"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">帷幕47号公寓</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/">
+                            
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archive
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                
+                    <li class="menu-item">
+                        <a id="search" href="">Search</a>
+                    </li>
+                
+            </ul>
+        
+    </nav>
+
+</div>
+
+      </header>
+      <div id="mnh-content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          51单片机笔记(2)-定时器
+        
+      </h1>
+
+      <time class="post-time">
+          3月 16 2025
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2><p>记录补票</p>
+<hr>
+<h5 id="定时器介绍"><a href="#定时器介绍" class="headerlink" title="定时器介绍"></a>定时器介绍</h5><p>1.单片机内部资源，电路连接与运转均在单片机内部完成</p>
+<p>2.作用：用于计时系统，可实现软件计时&#x2F;使程序每隔一固定时间完成一项操作；替代长时间Delay，提高CPU运行速率和效率……</p>
+<h6 id="at89c52定时器资源-使用内部资源时使用手册"><a href="#at89c52定时器资源-使用内部资源时使用手册" class="headerlink" title="at89c52定时器资源-使用内部资源时使用手册"></a>at89c52定时器资源-使用内部资源时使用手册</h6><p>T0、T1-与传统单片机兼容</p>
+<p>T2-本型号增加资源</p>
+<hr>
+<h5 id="定时器工作模式"><a href="#定时器工作模式" class="headerlink" title="定时器工作模式"></a>定时器工作模式</h5><p>根据时钟输出信号，每隔固定时间，计数单元数值加一，当计数单元数值增加到设定时间，计数单元会向中断系统发出中断申请，使程序跳转到中断函数运行。</p>
+<p>T0&#x2F;T1均有四种工作模式</p>
+<h6 id="模式0：13位定时器-计数器"><a href="#模式0：13位定时器-计数器" class="headerlink" title="模式0：13位定时器&#x2F;计数器"></a>模式0：13位定时器&#x2F;计数器</h6><h6 id="模式1：16位定时器-计数器（常用）"><a href="#模式1：16位定时器-计数器（常用）" class="headerlink" title="模式1：16位定时器&#x2F;计数器（常用）"></a><u>模式1：16位定时器&#x2F;计数器（常用）</u></h6><p><u>时钟系统-计数单元（TL0 &#x2F;&#x2F;timelow 65535—TH0 &#x2F;&#x2F;timehigh 65535 → TF0 &#x2F;&#x2F; +1）-中断系统</u></p>
+<h6 id="模式2：8位自动重装模式"><a href="#模式2：8位自动重装模式" class="headerlink" title="模式2：8位自动重装模式"></a>模式2：8位自动重装模式</h6><h6 id="模式3：两个8位计数器"><a href="#模式3：两个8位计数器" class="headerlink" title="模式3：两个8位计数器"></a>模式3：两个8位计数器</h6><hr>
+<p>定时器时钟来源C(ounter)&#x2F;T(imer) （1&#x2F;0）</p>
+<p>计时器–SYSclk（单片机内部）：系统时钟，即晶振周期。</p>
+<p>计数器–T0 Pin（单片机外部接口） </p>
+<hr>
+<p>中断系统：为使CPU具有对外界紧急事件的实时处理能力而设置</p>
+<p>中断源：请示CPU中断的请求源，一般允许多个中断源，各中断源具有优先级别，CPU总是先响应优先级别最高的中断请求。（可进行中断嵌套成为多级中断系统）</p>
+<h6 id="中断程序流程"><a href="#中断程序流程" class="headerlink" title="中断程序流程"></a>中断程序流程</h6><p>​				中断请求→执行中断处理程序→中断返回</p>
+<p>主程序→ ↑                           断点                           ↓→继续执行主程序</p>
+<p>at89c52中断资源（中断资源通常和单片机型号关联）</p>
+<p>中断源个数：8个（外部中断0，定时器0中断，外部中断1，定时器1中断，串口中断，外部中断2，外部中断3）</p>
+<p>中断优先级个数：4个</p>
+<h6 id="相关寄存器（连接软硬件的媒介，相当于一个复杂机器的操作按钮，在单片机中是一段特殊的RAM存储器，可以存储和读取数据-控制电路连接方式）"><a href="#相关寄存器（连接软硬件的媒介，相当于一个复杂机器的操作按钮，在单片机中是一段特殊的RAM存储器，可以存储和读取数据-控制电路连接方式）" class="headerlink" title="相关寄存器（连接软硬件的媒介，相当于一个复杂机器的操作按钮，在单片机中是一段特殊的RAM存储器，可以存储和读取数据+控制电路连接方式）"></a>相关寄存器（连接软硬件的媒介，相当于一个复杂机器的操作按钮，在单片机中是一段特殊的RAM存储器，可以存储和读取数据+控制电路连接方式）</h6><p>TCON（Timer control，定时器&#x2F;计数器T0、T1的控制寄存器，可位寻址）</p>
+<p>TMOD （Timer mode，选择定时T&#x2F;计数C功能，不可位寻址） 开始配置：M1-0  M0-1</p>
+<p>TL0  存储数值</p>
+<p>TL1 </p>
+<p>TH0 存储数值</p>
+<p>TH1 </p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/51/">51</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2025/03/16/2025-03-16-%E6%97%A5%E8%AE%B0/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">2025-03-16-日记</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2025/03/13/2025-03-13-%E6%97%A5%E8%AE%B0/">
+        <span class="next-text nav-default">2025-03-13-日记</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+      <script src="https://utteranc.es/client.js"
+        repo="[ENTER REPO HERE]"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+      </script>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="mnh-footer"><span class="footer-content-container">
+    <span class="footer-item">
+        
+            &copy;
+        
+        2025
+    </span>
+    
+        
+        <span class="footer-item footer-author">
+            developed with ❤️ by <a class="hexo-link" target="_blank" rel="noopener" href="https://github.com/faultzzz">Rvime</a>.
+        </span>
+    
+    <span class="footer-item powered-by">
+        Powered by <a class="hexo-link" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>.
+    </span>
+    
+    
+        <span class="footer-item footer-license">
+            Licensed under <a class="hexo-link" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0</a>.
+        </span>
+    
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+<div id="search-container" class="search-container-mask">
+    <div class="search-container">
+        <input type="hidden" id="algolia_index" value="<INDEX_NAME>"/>
+        <input type="hidden" id="algolia_app_id" value="<APP_ID>"/>
+        <input type="hidden" id="algolia_token" value="<API_KEY>"/>
+        <div class="section">
+            <div class="container">
+                <div class="panel">
+                    <div class="panel-heading">
+                        Search
+                        <a id="close" href="" style="float: right; color: #363636;">
+                            <i class="fas fa-times-circle" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <div class="panel-block">
+                        <div id="searchContainer" class="control has-icons-left">
+                            <input id="searchField" class="input" type="text" placeholder="Enter anything...">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-search" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div id="result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+    
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script type="text/javascript" src="/js/src/search.js"></script>
+
+
+  </body>
+</html>

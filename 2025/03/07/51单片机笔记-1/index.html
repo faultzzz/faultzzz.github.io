@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="51单片机笔记(1)-I2C总线+AT24C02(存储芯片)"/>
+
+
+
+
+  <meta name="keywords" content="51," />
+
+
+
+
+
+    <link rel="alternate" href="/default" title="帷幕47号公寓" >
+
+
+
+
+    <link rel="shortcut icon" type="image/x-icon" href="/icon.ico?v=1.1"/>
+
+
+
+<link rel="canonical" href="https://blog.faultzzz.top/2025/03/07/51单片机笔记-1/"/>
+
+
+<meta name="description" content="来源：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Mb411e7re&#x2F;?p&#x3D;27&amp;share_source&#x3D;copy_web&amp;vd_source&#x3D;7ee9fc9c6a7dcf70c11f80e97ab033ce +普中科技开发板说明手册 记录用  存储器介绍​    易失性存储器&#x2F;RAM:   静态RAM-SRAM 速度最快 容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="51单片机笔记(1)-I2C总线+AT24C02(存储芯片)">
+<meta property="og:url" content="https://blog.faultzzz.top/2025/03/07/51%E5%8D%95%E7%89%87%E6%9C%BA%E7%AC%94%E8%AE%B0-1/index.html">
+<meta property="og:site_name" content="帷幕47号公寓">
+<meta property="og:description" content="来源：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Mb411e7re&#x2F;?p&#x3D;27&amp;share_source&#x3D;copy_web&amp;vd_source&#x3D;7ee9fc9c6a7dcf70c11f80e97ab033ce +普中科技开发板说明手册 记录用  存储器介绍​    易失性存储器&#x2F;RAM:   静态RAM-SRAM 速度最快 容">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-07T10:29:53.000Z">
+<meta property="article:modified_time" content="2025-03-09T06:10:11.193Z">
+<meta property="article:author" content="Rvime">
+<meta property="article:tag" content="51">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1"/>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+    
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?[BAIDU ANALYTICS KEY]";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=[GOOGLE ANALYTICS GTAG]"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '[GOOGLE ANALYTICS GTAG]');
+  </script>
+
+
+
+
+
+    
+
+
+
+    <link rel="stylesheet" type="text/css" href="/css/search.css?v=1.1"/>
+
+
+
+    <title> 51单片机笔记(1)-I2C总线+AT24C02(存储芯片) - 帷幕47号公寓 </title>
+  <meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    <div id="main-container">
+      <header id="mnh-header"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">帷幕47号公寓</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/">
+                            
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archive
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+                
+                    <li class="menu-item">
+                        <a id="search" href="">Search</a>
+                    </li>
+                
+            </ul>
+        
+    </nav>
+
+</div>
+
+      </header>
+      <div id="mnh-content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          51单片机笔记(1)-I2C总线+AT24C02(存储芯片)
+        
+      </h1>
+
+      <time class="post-time">
+          3月 07 2025
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>来源：<a href="">https://www.bilibili.com/video/BV1Mb411e7re/?p=27&amp;share_source&#x3D;copy_web&amp;vd_source&#x3D;7ee9fc9c6a7dcf70c11f80e97ab033ce</a></p>
+<p>+普中科技开发板说明手册</p>
+<p>记录用</p>
+<hr>
+<h3 id="存储器介绍"><a href="#存储器介绍" class="headerlink" title="存储器介绍"></a>存储器介绍</h3><p>​    <strong>易失性存储器&#x2F;RAM</strong>:   静态RAM-SRAM <em><u>速度最快 容量小 成本高</u></em></p>
+<p>​								          动态RAM-DRAM    <em><u>电容+扫描电路 需动态刷新 eg.电脑内存条</u></em></p>
+<p><strong>非易失性存储器&#x2F;ROM</strong>:   掩膜ROM-Mask ROM <em><u>只读不写</u></em>   可编程ROM-PROM  <em><u>仅可写一次</u></em> </p>
+<p>​                                          可擦除可编程ROM-EPROM  <u><em>可擦除</em></u>   电可擦除可编程ROM-E2PROM   <em><u>电可擦除</u></em></p>
+<p>​										  Flash（闪存）</p>
+<p>​										  硬盘、软盘、光盘等</p>
+<h4 id="存储器简化模型："><a href="#存储器简化模型：" class="headerlink" title="存储器简化模型："></a>存储器简化模型：</h4><p>​	地址总线+数据总线排布为网格，用不同位置连接 断开存储数据。</p>
+<p>-Mask ROM  连接处使用二极管</p>
+<p>-PROM 置相对的两个二极管，其中一个易击穿 穿前断路穿后短路&#x2F;置熔丝，相反</p>
+<h3 id="AT24C02（存储芯片）介绍"><a href="#AT24C02（存储芯片）介绍" class="headerlink" title="AT24C02（存储芯片）介绍"></a>AT24C02（存储芯片）介绍</h3><p><u><em>可实现掉电不丢失</em></u></p>
+<ol>
+<li>存储介质：E2PROM</li>
+<li>通讯接口：I2C总线</li>
+<li>容量：256字节</li>
+<li>工作电压：1.8V-5.5V</li>
+</ol>
+<h3 id="I2C总线"><a href="#I2C总线" class="headerlink" title="***I2C总线"></a>***I2C总线</h3><p>一种通用数据总线（统一通信标准）：两根通信线-SCL、SDA</p>
+<p>同步 半双工 带数据应答</p>
+<h4 id="I2C电路规范"><a href="#I2C电路规范" class="headerlink" title="I2C电路规范"></a>I2C电路规范</h4><p>所有I2C设备的SCL连在一起，SDA连在一起</p>
+<p>SCL和SDA都要配置成<u>开漏输出模式</u>（0有驱动能力，1无；高电平时引脚断开，CPU与其中一个设备通信时不受其他设备干扰）</p>
+<p><em>&#x2F;&#x2F;原本IO口为弱上拉模式，开关闭合→输出为0  开关断开，数据由上传入通路→输出为1</em></p>
+<p><em>&#x2F;&#x2F;开漏模式：无上拉电阻 下方直接接开关：开关闭合接GND→输出为0   开关断开 引脚浮空→输出为1（电路断开 电平不稳定）</em></p>
+<p>SCL和SDA各添加一个上拉电阻（一般为4.7KΩ左右）</p>
+<p>理解：弹簧+标尺模型进行通信 拉下杆为0 不拉则为1</p>
+<h4 id="I2C时序结构-A（主机89C52）→B（从机24C02）"><a href="#I2C时序结构-A（主机89C52）→B（从机24C02）" class="headerlink" title="I2C时序结构 A（主机89C52）→B（从机24C02）"></a>I2C时序结构 A（主机89C52）→B（从机24C02）</h4><p>主机从机程序不同，一般只编写主机程序</p>
+<p>S蓝 起始条件：SCL高电平期间，SDA从高电平→低电平</p>
+<p>P红 终止条件：SCL高电平期间，SDA从低电平→高电平</p>
+<h6 id="字节传输"><a href="#字节传输" class="headerlink" title="字节传输"></a>字节传输</h6><p>S绿 发送一个字节：SCL低电平期间，A将数据位从高到低依次放到SDA线上，然后拉高SCL，B在SCL高电平期间读取数据位。循环8次即可发送一个字节*（SCL高电平期间SDA不允许有数据变化）*</p>
+<p>R紫 接收一个字节：SCL低电平期间，B将数据位从高到低依次放到SDA线上，然后拉高SCL，A在SCL高电平期间读取数据位。循环8次即可接收一个字节*（SCL高电平期间SDA不允许有数据变化，A在接收前需释放SDA）*</p>
+<h6 id="应答（额外一位-用于判断是否应答）"><a href="#应答（额外一位-用于判断是否应答）" class="headerlink" title="应答（额外一位 用于判断是否应答）"></a>应答（额外一位 用于判断是否应答）</h6><p>SA黄 发送应答：接收完一个字节后，主机在下一个时钟发送一位数据，数据0表应答，1表非应答。</p>
+<p>RA黑 接收应答：发送完一个字节后，主机在下一个时钟接收一位数据，判断B是否应答，数据0表应答，1表非应答。（A接收前需释放SDA）</p>
+<h5 id="I2C数据帧"><a href="#I2C数据帧" class="headerlink" title="I2C数据帧"></a>I2C数据帧</h5><p><u>发送一帧数据</u>（向谁发什么）：S→s（address：A6 A5 A4 A3 A2 A1 A0 R&#x2F;<strong>W</strong>）→RA→s→RA→s→……RA→P</p>
+<p><u>接收一帧数据</u>（向谁收什么）：S→s（address：A6 A5 A4 A3 A2 A1 A0 R&#x2F;<strong>W</strong>）→RA→R→SA→R→……SA→P</p>
+<p><u>复合格式</u>（先发送再接收，向谁收指定的什么）：S→s（address）→RA→s→RA→s→……RA→S→s（address）→RA→R→SA→R→……SA→P</p>
+<p>字节写：在地址处写入数据Data</p>
+<p>随机读：读出地址处数据Data</p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/51/">51</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2025/03/08/2025-03-08-%E6%97%A5%E8%AE%B0/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">2025-03-08-日记</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2025/03/06/2025-03-06-%E6%97%A5%E8%AE%B0/">
+        <span class="next-text nav-default">2025-03-06-日记</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+      <script src="https://utteranc.es/client.js"
+        repo="[ENTER REPO HERE]"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+      </script>
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="mnh-footer"><span class="footer-content-container">
+    <span class="footer-item">
+        
+            &copy;
+        
+        2025
+    </span>
+    
+        
+        <span class="footer-item footer-author">
+            developed with ❤️ by <a class="hexo-link" target="_blank" rel="noopener" href="https://github.com/faultzzz">Rvime</a>.
+        </span>
+    
+    <span class="footer-item powered-by">
+        Powered by <a class="hexo-link" target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>.
+    </span>
+    
+    
+        <span class="footer-item footer-license">
+            Licensed under <a class="hexo-link" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0</a>.
+        </span>
+    
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+<div id="search-container" class="search-container-mask">
+    <div class="search-container">
+        <input type="hidden" id="algolia_index" value="<INDEX_NAME>"/>
+        <input type="hidden" id="algolia_app_id" value="<APP_ID>"/>
+        <input type="hidden" id="algolia_token" value="<API_KEY>"/>
+        <div class="section">
+            <div class="container">
+                <div class="panel">
+                    <div class="panel-heading">
+                        Search
+                        <a id="close" href="" style="float: right; color: #363636;">
+                            <i class="fas fa-times-circle" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <div class="panel-block">
+                        <div id="searchContainer" class="control has-icons-left">
+                            <input id="searchField" class="input" type="text" placeholder="Enter anything...">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-search" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div id="result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+    
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script type="text/javascript" src="/js/src/search.js"></script>
+
+
+  </body>
+</html>
