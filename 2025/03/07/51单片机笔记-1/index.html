@@ -43,7 +43,7 @@
 <meta property="og:description" content="来源：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Mb411e7re&#x2F;?p&#x3D;27&amp;share_source&#x3D;copy_web&amp;vd_source&#x3D;7ee9fc9c6a7dcf70c11f80e97ab033ce +普中科技开发板说明手册 记录用  存储器介绍​    易失性存储器&#x2F;RAM:   静态RAM-SRAM 速度最快 容">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-07T10:29:53.000Z">
-<meta property="article:modified_time" content="2025-03-09T06:10:11.193Z">
+<meta property="article:modified_time" content="2025-08-26T14:54:53.212Z">
 <meta property="article:author" content="Rvime">
 <meta property="article:tag" content="51">
 <meta name="twitter:card" content="summary">
@@ -193,15 +193,24 @@
 <li>容量：256字节</li>
 <li>工作电压：1.8V-5.5V</li>
 </ol>
-<h3 id="I2C总线"><a href="#I2C总线" class="headerlink" title="***I2C总线"></a>***I2C总线</h3><p>一种通用数据总线（统一通信标准）：两根通信线-SCL、SDA</p>
-<p>同步 半双工 带数据应答</p>
+<h3 id="I2C总线"><a href="#I2C总线" class="headerlink" title="***I2C总线"></a>***I2C总线</h3><p>作用：实现多设备协作通信。</p>
+<p>一种通用数据总线（统一通信协议）</p>
+<p>两根通信线-SCL（Serial Clock）、SDA(Serial Data)</p>
+<ol>
+<li><p>同步：拥有单独的时钟线</p>
+</li>
+<li><p>半双工：只有一条数据线，分时段来回通信</p>
+</li>
+<li><p>带数据应答：检测是否接收到数据（串口无此功能）</p>
+</li>
+</ol>
 <h4 id="I2C电路规范"><a href="#I2C电路规范" class="headerlink" title="I2C电路规范"></a>I2C电路规范</h4><p>所有I2C设备的SCL连在一起，SDA连在一起</p>
 <p>SCL和SDA都要配置成<u>开漏输出模式</u>（0有驱动能力，1无；高电平时引脚断开，CPU与其中一个设备通信时不受其他设备干扰）</p>
 <p><em>&#x2F;&#x2F;原本IO口为弱上拉模式，开关闭合→输出为0  开关断开，数据由上传入通路→输出为1</em></p>
 <p><em>&#x2F;&#x2F;开漏模式：无上拉电阻 下方直接接开关：开关闭合接GND→输出为0   开关断开 引脚浮空→输出为1（电路断开 电平不稳定）</em></p>
 <p>SCL和SDA各添加一个上拉电阻（一般为4.7KΩ左右）</p>
-<p>理解：弹簧+标尺模型进行通信 拉下杆为0 不拉则为1</p>
-<h4 id="I2C时序结构-A（主机89C52）→B（从机24C02）"><a href="#I2C时序结构-A（主机89C52）→B（从机24C02）" class="headerlink" title="I2C时序结构 A（主机89C52）→B（从机24C02）"></a>I2C时序结构 A（主机89C52）→B（从机24C02）</h4><p>主机从机程序不同，一般只编写主机程序</p>
+<p>理解：弹簧+标尺模型进行通信 拉下杆为0 松手则为1</p>
+<h4 id="I2C时序结构-A（主机89C52）→B（从机24C02）"><a href="#I2C时序结构-A（主机89C52）→B（从机24C02）" class="headerlink" title="I2C时序结构 A（主机89C52）→B（从机24C02）"></a>I2C时序结构 A（主机89C52）→B（从机24C02）</h4><p>主机、从机程序不同，一般只编写主机程序</p>
 <p>S蓝 起始条件：SCL高电平期间，SDA从高电平→低电平</p>
 <p>P红 终止条件：SCL高电平期间，SDA从低电平→高电平</p>
 <h6 id="字节传输"><a href="#字节传输" class="headerlink" title="字节传输"></a>字节传输</h6><p>S绿 发送一个字节：SCL低电平期间，A将数据位从高到低依次放到SDA线上，然后拉高SCL，B在SCL高电平期间读取数据位。循环8次即可发送一个字节*（SCL高电平期间SDA不允许有数据变化）*</p>
